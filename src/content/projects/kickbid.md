@@ -1,6 +1,6 @@
 ---
 title: Kickbid
-tagline: A sneaker auction app — browse live drops, bid fast, and see if you’re leading or outbid.
+tagline: A sneaker auction app - browse live drops, bid fast, and see if you're leading or outbid.
 kind: ios-app
 order: 6
 period: Apr 2026
@@ -16,7 +16,7 @@ icon: ../../assets/projects/kickbid/icon.png
 screenshots:
   - src: ../../assets/projects/kickbid/01-drops.jpg
     alt: Drops screen with search, filters and an Ending Soon hero card
-    caption: Drops — search, filters and the auction ending soonest.
+    caption: Drops - search, filters and the auction ending soonest.
   - src: ../../assets/projects/kickbid/02-detail.jpg
     alt: Auction detail with a large photo, live countdown and the top bid
     caption: Auction detail with a live countdown and your status.
@@ -28,10 +28,10 @@ screenshots:
     caption: Bids per day, busiest day highlighted.
   - src: ../../assets/projects/kickbid/06-activity.jpg
     alt: Activity list filtered by Bidding, Won and Lost with a Bid again button
-    caption: Activity — Bidding, Won and Lost, with “Bid again”.
+    caption: Activity - Bidding, Won and Lost, with "Bid again".
   - src: ../../assets/projects/kickbid/05-selling.jpg
     alt: Selling summary with active auctions, total bids and highest value
-    caption: Selling — your own auctions at a glance.
+    caption: Selling - your own auctions at a glance.
   - src: ../../assets/projects/kickbid/07-new-auction.jpg
     alt: New Auction form with photo picker, name, opening price, description and end time
     caption: Creating a new auction.
@@ -42,20 +42,20 @@ links:
 
 ## Overview
 
-Kickbid is a **sneaker auction** app. Browse the drops that are live, place a bid in a few taps, keep track of whether you’re leading or outbid, and open an auction for your own pair. Prices are in Rupiah.
+Kickbid is a **sneaker auction** app. Browse the drops that are live, place a bid in a few taps, keep track of whether you're leading or outbid, and open an auction for your own pair. Prices are in Rupiah.
 
 ## My role
 
-Built with one teammate. **I built** the auction detail screen, the Place Bid sheet, the New Auction form, both charts and the formatting utilities, and handled integration and PR review. My teammate built the tab structure, the auction and My Items lists, and the first version of bid history. Later, for this portfolio, I redesigned the UI (“Hype Drop”) and the app icon.
+Built with one teammate. **I built** the auction detail screen, the Place Bid sheet, the New Auction form, both charts and the formatting utilities, and handled integration and PR review. My teammate built the tab structure, the auction and My Items lists, and the first version of bid history. Later, for this portfolio, I redesigned the UI ("Hype Drop") and the app icon.
 
 ## Key features
 
-- **Drops** — an “Ending Soon” hero with a per-second countdown, a two-column grid, filters (All / Live / Ending soon / Ended) and search.
-- **Your status everywhere** — Leading, Outbid, Won or Lost (or Selling / Sold for your own auctions), derived from the bid history so it never drifts.
-- **Two charts** — a price step chart that only goes up, with your bids marked, and a daily-bids bar chart.
-- **Fast bidding** — −/+ in Rp 50,000 steps, quick +50k / +100k / +250k / +500k buttons, or typed amounts, with validation and haptic confirmation.
-- **Activity** — every auction you’ve bid on, filtered by Bidding / Won / Lost, with “Bid again” for ones where you’ve been outbid.
-- **Selling** — a summary of your auctions and a form to create a new one with a photo.
+- The home screen highlights the auction that ends soonest with a countdown that updates every second, followed by a grid of all auctions with filters (All, Live, Ending soon, Ended) and search.
+- Every auction shows where you stand: Leading, Outbid, Won or Lost, or Selling and Sold for your own pairs. The status is calculated from the bid history, so it always matches the latest bid.
+- The auction page has two charts: the price over time, which only goes up and marks your bids, and the number of bids per day.
+- You can raise a bid with -/+ buttons in Rp 50,000 steps, quick buttons for +50k to +500k, or by typing an amount. Bids are checked before they are placed, and a haptic confirms them.
+- The Activity tab lists every auction you've bid on, filtered by Bidding, Won and Lost, with a "Bid again" button when you've been outbid.
+- The Selling tab sums up your own auctions and has a form to start a new one with a photo.
 
 ## Tech stack
 
@@ -63,7 +63,7 @@ SwiftUI (`TabView`, `NavigationStack`, `LazyVGrid`, `Grid`, `sensoryFeedback`, `
 
 ## Limitations & next steps
 
-- Data lives in memory with sample auctions and one fixed user — no accounts, storage or backend yet.
-- Other people’s bids don’t arrive in real time; bids can’t be cancelled.
+- Data lives in memory with sample auctions and one fixed user - no accounts, storage or backend yet.
+- Other people's bids don't arrive in real time; bids can't be cancelled.
 
-Next: a backend with WebSocket for real-time bids, push alerts when you’re outbid, SwiftData storage, auto-bid, and unit tests for the bidding rules.
+Next: a backend with WebSocket for real-time bids, push alerts when you're outbid, SwiftData storage, auto-bid, and unit tests for the bidding rules.

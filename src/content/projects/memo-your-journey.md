@@ -1,6 +1,6 @@
 ---
 title: Memo Your Journey
-tagline: A travel journal — save memories with photos, places and tags, then browse them on a photo calendar.
+tagline: A travel journal - save memories with photos, places and tags, then browse them on a photo calendar.
 kind: ios-app
 order: 8
 period: Mar 2026
@@ -28,7 +28,7 @@ screenshots:
     caption: Memory detail with a full-bleed photo gallery.
   - src: ../../assets/projects/memo-your-journey/06-detail-scrolled.jpg
     alt: Memory detail scrolled to the story and More from section
-    caption: The story, place and date, and “More from” the same country.
+    caption: The story, place and date, and "More from" the same country.
   - src: ../../assets/projects/memo-your-journey/07-memories-grid.jpg
     alt: Masonry grid of memories grouped by month
     caption: A masonry gallery grouped by month.
@@ -45,19 +45,19 @@ links:
 
 ## Overview
 
-Memo Your Journey is a **travel journal**. Save a memory with photos, a place, a date, a story and tags, then find it again on a calendar where each day shows its photo, or in a gallery of everything you’ve saved.
+Memo Your Journey is a **travel journal**. Save a memory with photos, a place, a date, a story and tags, then find it again on a calendar where each day shows its photo, or in a gallery of everything you've saved.
 
 ## My role
 
-Solo project from Challenge 1, my first at the Academy — design and development, plus a later “Warm Journal” redesign with full add/edit and a new “Travel Stamp” icon.
+Solo project from Challenge 1, my first at the Academy - design and development, plus a later "Warm Journal" redesign with full add/edit and a new "Travel Stamp" icon.
 
 ## Key features
 
-- **Photo calendar** — days with memories show a thumbnail; it opens on your latest memory, with a summary of memories, places and countries.
-- **Memories gallery** — a two-column masonry grid by month or a wide timeline (your choice is remembered), with search and category chips.
-- **Detail** — a swipeable full-bleed gallery with a stretchy header, Place | Date card, the story, and “More from” the same country.
-- **Add & edit** — up to 10 photos with a chosen cover, a required title, no future dates, location suggestions from places you’ve used, and searchable multi-select tags.
-- **“Warm Journal” design** — cream paper, terracotta accent, New York serif headings, full dark mode and the iOS 26 Liquid Glass tab bar.
+- The calendar shows a photo thumbnail on every day that has a memory. It opens on your latest memory and sums up how many memories, places and countries you have.
+- All memories can be browsed as a two-column masonry grid grouped by month, or as a timeline of wide photo cards. The app remembers your choice, and you can search or filter by category.
+- A memory opens with a swipeable full-screen photo gallery, then the place and date, the story, and more memories from the same country.
+- Adding or editing a memory lets you pick up to 10 photos and choose a cover, with a required title, no future dates, location suggestions from places you've used before, and searchable tags.
+- The "Warm Journal" design uses cream paper, a terracotta accent and serif headings, with full dark mode and the iOS 26 Liquid Glass tab bar.
 
 ## Tech stack
 
@@ -66,6 +66,6 @@ SwiftUI (`TabView`, `NavigationStack`, paging `ScrollView`, `contextMenu`, `Shar
 ## Limitations & next steps
 
 - Memories live in memory with sample data, so changes are lost when the app closes.
-- Locations are free text (“Country, Place”) and not connected to a map yet.
+- Locations are free text ("Country, Place") and not connected to a map yet.
 
-Next: SwiftData storage, picking places with MapKit, onboarding instead of sample data, and an “On this day” widget.
+Next: SwiftData storage, picking places with MapKit, onboarding instead of sample data, and an "On this day" widget.

@@ -22,7 +22,7 @@ screenshots:
     caption: Long numbers are written out as you type.
   - src: ../../assets/projects/terbilang/04-result-sheet-kapital.jpg
     alt: Full result sheet in uppercase style with word and character counts
-    caption: The full result sheet — Title, Sentence or UPPERCASE style.
+    caption: The full result sheet - Title, Sentence or UPPERCASE style.
   - src: ../../assets/projects/terbilang/06-history.jpg
     alt: History list grouped by Today and Yesterday
     caption: Copied and shared numbers are saved to history.
@@ -36,24 +36,24 @@ links:
 
 ## Overview
 
-In Indonesia, receipts, cheques and official documents often need the amount written out in words — *terbilang*. Terbilang converts a number into correct Indonesian words like `# Dua Puluh Tujuh Juta Lima Ratus Ribu Rupiah #`, ready to copy or share. The app’s interface is in Indonesian.
+In Indonesia, receipts, cheques and official documents often need the amount written out in words - *terbilang*. Terbilang converts a number into correct Indonesian words like `# Dua Puluh Tujuh Juta Lima Ratus Ribu Rupiah #`, ready to copy or share. The app's interface is in Indonesian.
 
 ## My role
 
-Solo personal project, built alongside the Academy — design, development, and a later “Paper Receipt” redesign with a new icon.
+Solo personal project, built alongside the Academy - design, development, and a later "Paper Receipt" redesign with a new icon.
 
 ## Key features
 
-- **Custom keypad** with 000, comma, delete and clear; the amount is formatted as you type (`Rp 27.500.000`).
-- **Receipt-style result** with one-tap Copy (with haptic feedback) and Share.
-- **Paste a number** — long-press to paste text like “Rp 1.250.000,75”.
-- **Up to 999 trillion** with four decimal places; over-limit input is rejected with a message.
-- **Correct Indonesian forms** — “seratus”, “seribu”, “sebelas”, “miliar”; decimals are read digit by digit, including zeros.
-- **History and settings** — the last 50 copied numbers, plus options for the “Rupiah” suffix, `# … #` marks, letter case and haptics.
+- A large custom keypad with 000, comma, delete and clear replaces the system keyboard, and the amount is formatted as you type (`Rp 27.500.000`).
+- The result appears on a receipt-style card, ready to copy with one tap (with haptic feedback) or to share.
+- Long-press the amount to paste a number from text like "Rp 1.250.000,75".
+- It handles numbers up to 999 trillion with four decimal places, and rejects longer input with a message.
+- It uses the correct Indonesian forms, like "seratus", "seribu", "sebelas" and "miliar", and reads decimals digit by digit, including zeros.
+- History. The last 50 copied or shared numbers are saved, and settings let you choose the "Rupiah" suffix, the `# ... #` marks, letter case and haptics.
 
 ## How it works
 
-Conversion is recursive and returns lowercase words; a separate `TerbilangStyle` adds “rupiah”, the `#` marks and capitalization, so one number can be shown in any style without recomputing. Amounts are kept as raw strings (`"1250000,75"`), so there’s no floating-point rounding.
+Conversion is recursive and returns lowercase words; a separate `TerbilangStyle` adds "rupiah", the `#` marks and capitalization, so one number can be shown in any style without recomputing. Amounts are kept as raw strings (`"1250000,75"`), so there's no floating-point rounding.
 
 ## Tech stack
 
@@ -61,7 +61,7 @@ SwiftUI (`NavigationStack(path:)`, `Grid`, `ShareLink`, `contextMenu`, `sensoryF
 
 ## Limitations & next steps
 
-- Decimals still end in “Rupiah” (no “sen” option yet), and only Indonesian is supported.
+- Decimals still end in "Rupiah" (no "sen" option yet), and only Indonesian is supported.
 - Designed for iPhone in portrait; no unit tests yet.
 
-Next: unit tests for the converter, a “sen” option, and a widget or Shortcut for quick conversions.
+Next: unit tests for the converter, a "sen" option, and a widget or Shortcut for quick conversions.

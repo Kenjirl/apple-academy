@@ -1,9 +1,9 @@
 ---
 title: KidSense v2
-tagline: A Godot 4 remake of KidSense — the boundaries-and-consent story game, rebuilt as a full game.
+tagline: A Godot 4 remake of KidSense - the boundaries-and-consent story game, rebuilt as a full game.
 kind: external
 order: 9
-period: Oct–Nov 2026
+period: Oct-Nov 2026
 date: 2026-10
 phase: Apple Developer Academy · Challenge 7
 team: Team of 4
