@@ -8,7 +8,7 @@ period: Aug 2026
 date: 2026-08
 phase: Apple Developer Academy · Challenge 5
 team: Team of 5
-role: Backend (FastAPI, Supabase, pgvector), API integration, sign-in & sessions, dog catalog and detail
+role: Backend (FastAPI, Supabase, pgvector) and API integration
 platform: iPhone · iOS 26+
 accent: "#7A9A3A"
 accentOnLight: "#5A6C34"
@@ -41,8 +41,8 @@ Every dog's nose print is unique, like a human fingerprint. Snoop lets shelters,
 
 Snoop was built by a team of five - it was the idea our Challenge 5 team chose to take all the way, after we dropped an earlier one (that one became [DogConnect](../dogconnect/)). I built:
 
-- **The entire backend** - a FastAPI service with Supabase Auth, Postgres + pgvector, Cloudinary for photos, deployed on Vercel.
-- **API integration in the app** - the networking layer, sign-in and session restore with refresh tokens, the dog catalog and detail screens from the server, pull-to-refresh, and medical-record icons.
+- The entire backend, a FastAPI service with Supabase Auth, Postgres + pgvector and Cloudinary for photos, deployed on Vercel.
+- The code in the app that talks to the backend.
 - Reviewing and merging the team's pull requests.
 
 My teammates built the scan pipeline and ML models, the design system, the dog editor and medical forms, and the nose-print recognizer.
@@ -77,10 +77,14 @@ The models run entirely on the device; the server only stores vectors and search
 - **App** - Swift 6 (strict concurrency), SwiftUI, Observation, Core ML + Vision (4 models), AVFoundation, PhotosUI, Lottie, `URLSession` + `Codable` with bearer and refresh tokens.
 - **Backend** - Python 3.12, FastAPI, Pydantic, Supabase Auth, Supabase Postgres + pgvector, Cloudinary, Vercel serverless.
 
-## Limitations & next steps
+## Limitations
 
 - The similarity threshold is not calibrated yet - it was tested with little real data and no negative samples, so accuracy isn't measured.
 - The database runs on Supabase's free tier, which pauses after a few idle days.
-- Dark mode isn't optimized yet. 
+- Dark mode isn't optimized yet.
 - Connection errors on sign-in still show as "Invalid email or password".
 - Refresh tokens live in `UserDefaults` rather than the Keychain, and there are no unit tests yet.
+
+## Can be next
+
+Calibrate the similarity threshold with more real nose prints and negative samples, a proper dark mode, clearer error messages on sign-in, refresh tokens in the Keychain, and unit tests for the API.

@@ -61,9 +61,11 @@ Built with one teammate. **I built** the auction detail screen, the Place Bid sh
 
 SwiftUI (`TabView`, `NavigationStack`, `LazyVGrid`, `Grid`, `sensoryFeedback`, `contentTransition`), Swift Charts (step `LineMark`/`AreaMark`, `PointMark`, `BarMark`), `TimelineView` for countdowns, Observation (`@Observable` store), PhotosUI, `Decimal.FormatStyle` with the `id_ID` locale. No third-party dependencies.
 
-## Limitations & next steps
+## Limitations
 
 - Data lives in memory with sample auctions and one fixed user - no accounts, storage or backend yet.
 - Other people's bids don't arrive in real time; bids can't be cancelled.
 
-Next: a backend with WebSocket for real-time bids, push alerts when you're outbid, SwiftData storage, auto-bid, and unit tests for the bidding rules.
+## Can be next
+
+A backend with WebSocket for real-time bids, push alerts when you're outbid, SwiftData storage, auto-bid, and unit tests for the bidding rules.

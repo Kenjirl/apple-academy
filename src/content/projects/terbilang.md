@@ -59,9 +59,11 @@ Conversion is recursive and returns lowercase words; a separate `TerbilangStyle`
 
 SwiftUI (`NavigationStack(path:)`, `Grid`, `ShareLink`, `contextMenu`, `sensoryFeedback`), Observation, `@AppStorage` wrapped in a `DynamicProperty` for settings, `UserDefaults` + `Codable` for history, `UIPasteboard`. No third-party dependencies.
 
-## Limitations & next steps
+## Limitations
 
 - Decimals still end in "Rupiah" (no "sen" option yet), and only Indonesian is supported.
 - Designed for iPhone in portrait; no unit tests yet.
 
-Next: unit tests for the converter, a "sen" option, and a widget or Shortcut for quick conversions.
+## Can be next
+
+Unit tests for the converter, a "sen" option, and a widget or Shortcut for quick conversions.

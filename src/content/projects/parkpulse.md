@@ -56,10 +56,12 @@ Two shared managers live in the SwiftUI environment. `ParkingLocationManager` wr
 
 SwiftUI (`TabView`, `NavigationStack`, `TimelineView`, `AngularGradient`, custom button styles), Combine, Core Location, MapKit reverse geocoding, UIKit haptics, AudioToolbox system sounds. No third-party dependencies.
 
-## Limitations & next steps
+## Limitations
 
 - Parking data lives in memory only and is lost when the app closes.
 - Height uses GPS altitude, which can be off by a few meters inside a parking garage.
 - Feedback only runs while the app is open.
 
-Next: SwiftData storage, the barometer (`CMAltimeter`) for more accurate floors, and a Live Activity for the current spot.
+## Can be next
+
+SwiftData storage, the barometer (`CMAltimeter`) for more accurate floors, and a Live Activity for the current spot.

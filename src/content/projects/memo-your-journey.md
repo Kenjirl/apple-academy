@@ -63,9 +63,11 @@ Solo project from Challenge 1, my first at the Academy - design and development,
 
 SwiftUI (`TabView`, `NavigationStack`, paging `ScrollView`, `contextMenu`, `ShareLink`), a custom flow layout with the `Layout` protocol, a masonry grid, Observation (`@Observable` store), PhotosUI with resizing to 1600 px JPEG and an `NSCache`. No third-party dependencies.
 
-## Limitations & next steps
+## Limitations
 
 - Memories live in memory with sample data, so changes are lost when the app closes.
 - Locations are free text ("Country, Place") and not connected to a map yet.
 
-Next: SwiftData storage, picking places with MapKit, onboarding instead of sample data, and an "On this day" widget.
+## Can be next
+
+SwiftData storage, picking places with MapKit, onboarding instead of sample data, and an "On this day" widget.

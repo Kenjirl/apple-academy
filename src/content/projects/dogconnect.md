@@ -66,10 +66,12 @@ UI-free managers hold the logic, with one SwiftUI flow per role:
 
 SwiftUI (`UIViewRepresentable` for Agora video views), Combine, MultipeerConnectivity + Bonjour, Keychain Services, CryptoKit, Agora RTC Engine and Agora RTM (Swift Packages), AVFoundation for camera and microphone permissions.
 
-## Limitations & next steps
+## Limitations
 
 - **No dog detection yet** - there's no computer vision for the dog's activity and no sound analysis for barking, so there are no alerts; the owner has to open the live view.
 - It uses Agora temporary tokens (valid 24 hours) and a fixed channel; real use needs a token server.
 - Streaming only runs while the app is open, and there's no recording or history.
 
-Next: bark detection with Sound Analysis and push alerts, activity detection with Vision / Core ML, and a small token server.
+## Can be next
+
+Bark detection with Sound Analysis and push alerts, activity detection with Vision / Core ML, and a small token server.

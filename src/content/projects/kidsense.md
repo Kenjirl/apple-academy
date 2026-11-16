@@ -71,10 +71,12 @@ Stories are **data, not code**. A `StoryModel` holds a list of scenes; each scen
 - **State** - `ObservableObject` for the global screen state, `@AppStorage` for character, scene and checkpoint.
 - **Lottie** (Swift Package) for props and rewards, custom Fredoka font.
 
-## Limitations & next steps
+## Limitations
 
 - Only Chapter 1 is playable; Chapter 2 is a placeholder.
 - Sound effects are prepared but turned off, and stars are not shown to the player yet.
 - Some layouts use fixed values, so a few screens fit some devices better than others.
 
-KidSense continues as **KidSense v2**, a remake in Godot 4 (Challenge 7), which will have its own site.
+## Can be next
+
+More chapters, voice narration for kids who can't read well yet, sound effects turned back on, and stars shown as a reward. The team continued the idea as KidSense v2, a remake in Godot 4 (Challenge 7), which will have its own site.

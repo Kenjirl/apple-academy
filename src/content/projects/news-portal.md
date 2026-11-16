@@ -82,11 +82,13 @@ The backend has 11 REST endpoints plus one WebSocket. The Swagger page at `/docs
 - **App** - SwiftUI with custom tab bar and components, `URLSessionWebSocketTask` with ping and auto-reconnect, UserNotifications + APNs, Combine stores, four bundled open-licensed fonts. No third-party dependencies.
 - **Backend** - Python 3.12, FastAPI, Pydantic, PostgreSQL 16 with SQLAlchemy, aioapns (token-based, sandbox), Docker Compose.
 
-## Limitations & next steps
+## Limitations
 
 - No newsroom UI and **no authentication** on the API - stories are published from Swagger.
 - The backend runs on a local network over HTTP and isn't deployed yet; push uses the APNs sandbox.
 - WebSocket connections live in one process's memory, so it can't scale to several instances.
 - No pagination, search or offline cache in the app, and no automated tests yet.
 
-Next: a small web newsroom with login and image upload, an HTTPS/WSS deployment with production APNs, then pagination and caching.
+## Can be next
+
+A small web newsroom with login and image upload, an HTTPS/WSS deployment with production APNs, then pagination and caching.
