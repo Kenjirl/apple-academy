@@ -9,7 +9,7 @@ interface Props {
 
 const { project } = Astro.props;
 const d = project.data;
-const shot = d.screenshots[0];
+const shot = d.screenshots.find((s) => s.frame !== 'none');
 const href = projectUrl(project);
 ---
 <article

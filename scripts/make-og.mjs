@@ -69,7 +69,7 @@ async function loadProjects() {
 
 async function projectImage(p, profile) {
   const landscape = p.orientation === 'landscape';
-  const shot = p.screenshots[0];
+  const shot = p.screenshots.find((s) => s.frame !== 'none');
   const titleLines = wrap(p.title, 18, 2);
   const tagLines = wrap(p.tagline, 36, 4);
   const phase = p.phase.replace('Apple Developer Academy · ', 'Apple Developer Academy · ');

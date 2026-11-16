@@ -14,6 +14,10 @@ accentOnLight: "#9B2C1F"
 accentOnDark: "#E8836F"
 icon: ../../assets/projects/news-portal/icon.png
 screenshots:
+  - src: ../../assets/projects/news-portal/08-story-poster.jpg
+    alt: One-page story "The Boy Who Delivers the News", where Holmes explains the push model, WebSockets and APNs to Watson, next to a diagram of the app flow from subscribing to a section to real-time updates and notifications
+    caption: A one-page story I made for this challenge, explaining the push model, WebSockets and APNs through Holmes and Watson, next to the app's flow.
+    frame: none
   - src: ../../assets/projects/news-portal/01-subscription-coupon.jpg
     alt: Onboarding styled as a newspaper subscription coupon with three steps
     caption: Onboarding as a subscription coupon - connect, allow notifications, save this iPhone.
@@ -35,10 +39,6 @@ screenshots:
   - src: ../../assets/projects/news-portal/07-front-page-dark.jpg
     alt: Front page in dark mode with dark brown paper and cream ink
     caption: The "evening edition" in Dark Mode.
-  - src: ../../assets/projects/news-portal/08-story-poster.jpg
-    alt: One-page story "The Boy Who Delivers the News", where Holmes explains the push model, WebSockets and APNs to Watson, next to a diagram of the app flow from subscribing to a section to real-time updates and notifications
-    caption: A one-page story I made for this challenge, explaining the push model, WebSockets and APNs through Holmes and Watson, next to the app's flow.
-    frame: none
 stack: [SwiftUI, WebSocket, UserNotifications, APNs, Combine, FastAPI, PostgreSQL, SQLAlchemy, aioapns, Docker]
 links:
   - { label: App repo, url: "https://github.com/Kenjirl/ch6-news-portal-swift" }

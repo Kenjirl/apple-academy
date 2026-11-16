@@ -12,7 +12,7 @@ interface Props {
 const { project, eager = false } = Astro.props;
 const d = project.data;
 const landscape = d.orientation === 'landscape';
-const shots = d.screenshots.slice(0, landscape ? 2 : 3);
+const shots = d.screenshots.filter((s) => s.frame !== 'none').slice(0, landscape ? 2 : 3);
 const href = projectUrl(project);
 ---
 <article
