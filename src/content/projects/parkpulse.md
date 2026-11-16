@@ -5,7 +5,7 @@ kind: ios-app
 order: 5
 period: Jul–Aug 2026
 date: 2026-07
-phase: Apple Developer Academy · Challenge 4
+phase: Personal project · during the Academy
 team: Solo
 role: Design and development
 platform: iPhone & iPad · iOS 26.5+
