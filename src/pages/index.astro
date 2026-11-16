@@ -4,15 +4,40 @@ import AppIcon from '../components/AppIcon.astro';
 import FeaturedCard from '../components/FeaturedCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import ExternalCard from '../components/ExternalCard.astro';
-import { accentStyle, getProfile, getProjects, isSolo, projectUrl, toolbox } from '../lib/site';
+import { absoluteUrl, accentStyle, baseGraph, getProfile, getProjects, isSolo, projectUrl, toolbox } from '../lib/site';
 
 const profile = await getProfile();
 const { caseStudies, featured, more, external, all } = await getProjects();
 const groups = toolbox(all);
 const solo = caseStudies.filter(isSolo).length;
 const withBackend = caseStudies.filter((p) => p.data.kind === 'ios-app+backend').length;
+
+const graph = await baseGraph(Astro.site);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    ...graph.nodes,
+    {
+      '@type': 'CollectionPage',
+      '@id': `${graph.home}#page`,
+      url: graph.home,
+      name: 'Portfolio during Academy',
+      isPartOf: { '@id': graph.websiteId },
+      about: { '@id': graph.personId },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: caseStudies.map((p, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: p.data.title,
+          url: absoluteUrl(projectUrl(p), Astro.site),
+        })),
+      },
+    },
+  ],
+};
 ---
-<Base>
+<Base jsonLd={jsonLd}>
   <!-- Hero -->
   <section class="mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 sm:pt-20">
     <p class="text-sm font-semibold text-muted">{profile.headline}</p>
@@ -40,7 +65,8 @@ const withBackend = caseStudies.filter((p) => p.data.kind === 'ios-app+backend')
     </div>
 
     <!-- Every app icon, in reading order -->
-    <ul class="mt-14 flex flex-wrap items-center gap-3 sm:gap-4" aria-label="Apps on this site">
+    <nav aria-label="Apps" class="mt-14">
+    <ul class="flex flex-wrap items-center gap-3 sm:gap-4">
       {
         caseStudies.map((p, i) => (
           <li class="accent-scope" style={accentStyle(p)}>
@@ -51,6 +77,7 @@ const withBackend = caseStudies.filter((p) => p.data.kind === 'ios-app+backend')
         ))
       }
     </ul>
+    </nav>
     <p class="mt-4 text-sm text-muted">
       {caseStudies.length} apps · {solo} solo, {caseStudies.length - solo} in teams · {withBackend} with a backend I wrote
     </p>

@@ -3,18 +3,17 @@ interface Props {
   items: string[];
   /** Show at most this many chips, then "+N". */
   max?: number;
-  label?: string;
 }
 
-const { items, max, label = 'Tech stack' } = Astro.props;
+const { items, max } = Astro.props;
 const shown = max ? items.slice(0, max) : items;
 const rest = items.length - shown.length;
 ---
-<ul class="flex flex-wrap gap-1.5" aria-label={label}>
+<ul class="flex flex-wrap gap-1.5">
   {
     shown.map((item) => (
       <li class="rounded-full border border-line bg-surface-2 px-2.5 py-1 text-xs font-medium text-muted">{item}</li>
     ))
   }
-  {rest > 0 && <li class="rounded-full px-1.5 py-1 text-xs font-medium text-faint" aria-label={`and ${rest} more`}>+{rest}</li>}
+  {rest > 0 && <li class="rounded-full px-1.5 py-1 text-xs font-medium text-faint">+{rest}<span class="sr-only"> more</span></li>}
 </ul>

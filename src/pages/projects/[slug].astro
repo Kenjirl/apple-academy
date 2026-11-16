@@ -7,7 +7,7 @@ import FactTable from '../../components/FactTable.astro';
 import ScreenshotGallery from '../../components/ScreenshotGallery.astro';
 import StackList from '../../components/StackList.astro';
 import ExternalCard from '../../components/ExternalCard.astro';
-import { accentStyle, getProjects, projectUrl, withBase, type Project } from '../../lib/site';
+import { absoluteUrl, accentStyle, baseGraph, getProjects, projectUrl, withBase, type Project } from '../../lib/site';
 
 export const getStaticPaths = (async () => {
   const { caseStudies, external } = await getProjects();
@@ -35,12 +35,57 @@ const { Content } = await render(project);
 
 // Pre-rendered by `npm run og` (scripts/make-og.mjs) into public/og/.
 const ogImage = withBase(`og/${project.id}.png`);
+
+const graph = await baseGraph(Astro.site);
+const pageUrl = absoluteUrl(projectUrl(project), Astro.site);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    ...graph.nodes,
+    {
+      '@type': d.kind === 'game' ? 'VideoGame' : 'SoftwareApplication',
+      '@id': `${pageUrl}#app`,
+      name: d.title,
+      description: d.tagline,
+      url: pageUrl,
+      image: absoluteUrl(ogImage, Astro.site),
+      applicationCategory: d.kind === 'game' ? 'GameApplication' : 'MobileApplication',
+      operatingSystem: 'iOS',
+      dateCreated: d.date,
+      keywords: d.stack.join(', '),
+      ...(d.kind === 'game' ? { gamePlatform: 'iOS' } : {}),
+      author: { '@id': graph.personId },
+      ...(d.links.filter((l) => !l.private && l.url).length
+        ? { sameAs: d.links.filter((l) => !l.private && l.url).map((l) => l.url) }
+        : {}),
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#page`,
+      url: pageUrl,
+      name: `${d.title} — case study`,
+      description: d.tagline,
+      isPartOf: { '@id': graph.websiteId },
+      about: { '@id': `${pageUrl}#app` },
+      author: { '@id': graph.personId },
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: graph.home },
+          { '@type': 'ListItem', position: 2, name: d.title, item: pageUrl },
+        ],
+      },
+    },
+  ],
+};
 ---
 <Base
   title={d.title}
   description={`${d.tagline} ${d.phase}, ${d.period}.`}
   image={ogImage}
   imageAlt={`${d.title} — ${d.tagline}`}
+  ogType="article"
+  jsonLd={jsonLd}
 >
   <article class="accent-scope" style={accentStyle(project)}>
     <!-- Header -->
@@ -53,9 +98,15 @@ const ogImage = withBase(`og/${project.id}.png`);
       >
       </div>
       <div class="mx-auto max-w-6xl px-4 pb-10 pt-8 sm:px-6 sm:pt-12">
-        <a href={`${withBase()}#projects`} class="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-ink">
-          <span aria-hidden="true">←</span> All projects
-        </a>
+        <nav aria-label="Breadcrumb">
+          <ol class="flex flex-wrap items-center gap-1.5 text-sm font-medium text-muted">
+            <li><a href={withBase()} class="hover:text-ink">Home</a></li>
+            <li aria-hidden="true">/</li>
+            <li><a href={`${withBase()}#projects`} class="hover:text-ink">Projects</a></li>
+            <li aria-hidden="true">/</li>
+            <li><span aria-current="page" class="text-ink">{d.title}</span></li>
+          </ol>
+        </nav>
         <div class="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
           <AppIcon src={d.icon} title={d.title} size={88} loading="eager" />
           <div>

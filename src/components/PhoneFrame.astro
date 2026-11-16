@@ -25,10 +25,10 @@ const {
 // container, the inner body uses cqw units against it.
 const landscape = orientation === 'landscape';
 ---
-<div class:list={['phone-frame', className]}>
-<div
+<span class:list={['phone-frame block', className]}>
+<span
   class:list={[
-    'phone-frame__body relative bg-bezel shadow-[0_1px_0_rgb(255_255_255/0.06)_inset,0_18px_40px_-18px_rgb(0_0_0/0.45)]',
+    'phone-frame__body relative block bg-bezel shadow-[0_1px_0_rgb(255_255_255/0.06)_inset,0_18px_40px_-18px_rgb(0_0_0/0.45)]',
     landscape ? 'phone-frame--landscape' : 'phone-frame--portrait',
   ]}
 >
@@ -44,8 +44,8 @@ const landscape = orientation === 'landscape';
     pictureAttributes={{ class: 'block' }}
     class="block h-auto w-full bg-surface-2"
   />
-</div>
-</div>
+</span>
+</span>
 
 <style>
   .phone-frame {

@@ -71,7 +71,7 @@ const href = projectUrl(project);
     <div class="flex items-center gap-4">
       <AppIcon src={d.icon} title={d.title} size={56} loading={eager ? 'eager' : 'lazy'} />
       <div class="min-w-0">
-        <p class="text-xs font-semibold uppercase tracking-[0.08em] text-accent-ink">{d.phase.replace('Apple Developer Academy · ', '')} · {d.period}</p>
+        <p class="text-xs font-semibold uppercase tracking-[0.08em] text-accent-ink">{d.phase.replace('Apple Developer Academy · ', '')} · <time datetime={d.date}>{d.period}</time></p>
         <h3 class="font-display text-2xl font-bold tracking-tight">
           <a href={href} class="after:absolute after:inset-0 after:z-30 after:content-[''] focus-visible:outline-none group-has-[a:focus-visible]:underline">
             {d.title}

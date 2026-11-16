@@ -23,7 +23,7 @@ const url = d.externalUrl;
       <Heading class="text-lg font-bold leading-tight tracking-tight">
         {url ? <a href={url} class="after:absolute after:inset-0 after:content-['']">{d.title}</a> : d.title}
       </Heading>
-      <p class="text-xs text-muted">{d.phase.replace('Apple Developer Academy · ', '')} · {d.period} · {d.team}</p>
+      <p class="text-xs text-muted">{d.phase.replace('Apple Developer Academy · ', '')} · <time datetime={d.date}>{d.period}</time> · {d.team}</p>
     </div>
     <span
       class:list={[

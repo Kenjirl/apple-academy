@@ -66,7 +66,7 @@ const items = await Promise.all(
         <button type="button" data-prev aria-label="Previous screenshot" class="shrink-0 rounded-full bg-white/10 p-3 hover:bg-white/20">
           <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12.8 4.2a.75.75 0 0 1 0 1.06L8.06 10l4.74 4.74a.75.75 0 1 1-1.06 1.06l-5.27-5.27a.75.75 0 0 1 0-1.06l5.27-5.27a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" /></svg>
         </button>
-        <img data-image alt="" class:list={['max-h-full min-w-0 object-contain shadow-2xl', landscape ? 'w-full rounded-2xl' : 'h-full rounded-[2rem]']} />
+        <img data-image src={items[0]?.full} alt="" class:list={['max-h-full min-w-0 object-contain shadow-2xl', landscape ? 'w-full rounded-2xl' : 'h-full rounded-[2rem]']} />
         <button type="button" data-next aria-label="Next screenshot" class="shrink-0 rounded-full bg-white/10 p-3 hover:bg-white/20">
           <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.2 4.2a.75.75 0 0 1 1.06 0l5.27 5.27a.75.75 0 0 1 0 1.06L8.26 15.8a.75.75 0 1 1-1.06-1.06L11.94 10 7.2 5.26a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
         </button>

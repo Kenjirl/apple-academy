@@ -40,7 +40,7 @@ const href = projectUrl(project);
           <a href={href} class="after:absolute after:inset-0 after:content-['']">{d.title}</a>
         </h3>
         <p class="text-xs text-muted">
-          {d.period} · {isSolo(project) ? 'Solo' : d.team}
+          <time datetime={d.date}>{d.period}</time> · {isSolo(project) ? 'Solo' : d.team}
         </p>
       </div>
     </div>

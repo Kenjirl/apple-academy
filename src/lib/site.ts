@@ -2,6 +2,9 @@ import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 
 export type Project = CollectionEntry<'projects'>;
 
+/** Site name used in the header, <title> and og:site_name. */
+export const SITE_NAME = 'Portfolio during Academy';
+
 /** Prefix a site path with the configured base (e.g. /apple-academy/). */
 export function withBase(path = ''): string {
   const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
@@ -75,4 +78,38 @@ export function toolbox(projects: Project[]) {
   const other = [...used].filter((i) => !known.has(i));
   if (other.length) groups.push({ name: 'Other', items: other });
   return groups;
+}
+
+/** Absolute URL on the live site. */
+export const absoluteUrl = (path: string, site: URL | undefined) => new URL(path, site).toString();
+
+/** schema.org nodes shared by every page: the site and its author. */
+export async function baseGraph(site: URL | undefined) {
+  const profile = await getProfile();
+  const home = absoluteUrl(withBase(), site);
+  return {
+    home,
+    personId: `${home}#person`,
+    websiteId: `${home}#website`,
+    nodes: [
+      {
+        '@type': 'WebSite',
+        '@id': `${home}#website`,
+        name: SITE_NAME,
+        url: home,
+        description: profile.intro,
+        inLanguage: 'en',
+        author: { '@id': `${home}#person` },
+      },
+      {
+        '@type': 'Person',
+        '@id': `${home}#person`,
+        name: profile.name,
+        url: home,
+        description: profile.headline,
+        affiliation: { '@type': 'EducationalOrganization', name: 'Apple Developer Academy' },
+        sameAs: [profile.github, profile.mainSite].filter(Boolean),
+      },
+    ],
+  };
 }

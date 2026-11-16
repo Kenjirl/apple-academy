@@ -1,4 +1,4 @@
-# Apple Developer Academy 2026 — portfolio
+# Portfolio during Academy — Apple Developer Academy 2026
 
 Apps I built as a learner at Apple Developer Academy in 2026: case studies with screenshots, my role in each team, and honest limitations.
 

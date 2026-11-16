@@ -6,9 +6,9 @@ interface Props {
 }
 
 const d = Astro.props.project.data;
-const rows: { label: string; value: string; links?: typeof d.links }[] = [
+const rows: { label: string; value: string; links?: typeof d.links; datetime?: string }[] = [
   { label: 'Phase', value: d.phase },
-  { label: 'Period', value: d.period },
+  { label: 'Period', value: d.period, datetime: d.date },
   { label: 'Team', value: d.team },
   { label: 'My role', value: d.role },
   ...(d.platform ? [{ label: 'Platform', value: d.platform }] : []),
@@ -38,6 +38,8 @@ const rows: { label: string; value: string; links?: typeof d.links }[] = [
                 </li>
               ))}
             </ul>
+          ) : r.datetime ? (
+            <time datetime={r.datetime}>{r.value}</time>
           ) : (
             r.value
           )}
