@@ -42,6 +42,8 @@ const projects = defineCollection({
               src: image(),
               alt: z.string(),
               caption: z.string().optional(),
+              // "none" for artwork that isn't an app screen (no phone frame)
+              frame: z.enum(['phone', 'none']).default('phone'),
             }),
           )
           .default([]),

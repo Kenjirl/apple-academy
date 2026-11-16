@@ -1,5 +1,5 @@
 ---
-import { getImage } from 'astro:assets';
+import { getImage, Picture } from 'astro:assets';
 import PhoneFrame from './PhoneFrame.astro';
 import { type Project } from '../lib/site';
 
@@ -13,8 +13,10 @@ const landscape = d.orientation === 'landscape';
 
 const items = await Promise.all(
   d.screenshots.map(async (s, i) => {
-    const full = await getImage({ src: s.src, width: landscape ? 1800 : 828, format: 'webp' });
-    return { ...s, i, full: full.src };
+    const artwork = s.frame === 'none';
+    const wide = landscape || artwork;
+    const full = await getImage({ src: s.src, width: wide ? 1800 : 828, format: 'webp' });
+    return { ...s, i, artwork, wide, full: full.src };
   }),
 );
 ---
@@ -26,7 +28,13 @@ const items = await Promise.all(
   >
     {
       items.map((s) => (
-        <li class:list={['shrink-0 snap-start', landscape ? 'w-[82vw] max-w-[560px]' : 'w-[62vw] max-w-[250px]']}>
+        <li
+          class:list={[
+            'shrink-0 snap-start',
+            // Artwork is sized to roughly the height of a portrait phone frame.
+            s.artwork ? 'w-[88vw] max-w-[786px]' : landscape ? 'w-[82vw] max-w-[560px]' : 'w-[62vw] max-w-[250px]',
+          ]}
+        >
           <figure>
             <button
               type="button"
@@ -34,16 +42,35 @@ const items = await Promise.all(
               data-full={s.full}
               data-caption={s.caption ?? s.alt}
               data-alt={s.alt}
-              class="block w-full cursor-zoom-in rounded-[14%] text-left transition-transform hover:-translate-y-1 motion-reduce:transition-none"
+              data-wide={s.wide ? 'true' : undefined}
+              class:list={[
+                'block w-full cursor-zoom-in text-left transition-transform hover:-translate-y-1 motion-reduce:transition-none',
+                s.artwork ? 'rounded-2xl' : 'rounded-[14%]',
+              ]}
               aria-label={`Enlarge screenshot ${s.i + 1}: ${s.alt}`}
             >
-              <PhoneFrame
-                src={s.src}
-                alt={s.alt}
-                orientation={d.orientation}
-                sizes={landscape ? '(min-width: 640px) 560px, 82vw' : '(min-width: 640px) 250px, 62vw'}
-                loading={s.i < 3 ? 'eager' : 'lazy'}
-              />
+              {s.artwork ? (
+                <Picture
+                  src={s.src}
+                  alt={s.alt}
+                  widths={[800, 1200, 1800]}
+                  sizes="(min-width: 640px) 786px, 88vw"
+                  formats={['avif', 'webp']}
+                  fallbackFormat="webp"
+                  loading={s.i < 3 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  pictureAttributes={{ class: 'block' }}
+                  class="block h-auto w-full rounded-2xl border border-line bg-surface-2 shadow-[0_18px_40px_-24px_rgb(0_0_0/0.45)]"
+                />
+              ) : (
+                <PhoneFrame
+                  src={s.src}
+                  alt={s.alt}
+                  orientation={d.orientation}
+                  sizes={landscape ? '(min-width: 640px) 560px, 82vw' : '(min-width: 640px) 250px, 62vw'}
+                  loading={s.i < 3 ? 'eager' : 'lazy'}
+                />
+              )}
             </button>
             {s.caption && <figcaption class="mt-3 px-1 text-sm leading-snug text-muted">{s.caption}</figcaption>}
           </figure>
@@ -92,6 +119,11 @@ const items = await Promise.all(
       const t = triggers[current];
       img.src = t.dataset.full!;
       img.alt = t.dataset.alt ?? '';
+      // Wide images fill the width, phone screenshots fill the height.
+      const wide = t.dataset.wide === 'true';
+      img.style.width = wide ? '100%' : 'auto';
+      img.style.height = wide ? 'auto' : '100%';
+      img.style.borderRadius = wide ? '1rem' : '';
       caption.textContent = t.dataset.caption ?? '';
       counter.textContent = `${current + 1} / ${triggers.length}`;
     };
