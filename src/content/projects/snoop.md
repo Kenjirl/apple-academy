@@ -7,7 +7,7 @@ order: 2
 period: Aug 2026
 date: 2026-08
 phase: Apple Developer Academy · Challenge 5
-team: Team of 4
+team: Team of 5
 role: Backend (FastAPI, Supabase, pgvector), API integration, sign-in & sessions, dog catalog and detail
 platform: iPhone · iOS 26+
 accent: "#7A9A3A"
@@ -39,7 +39,7 @@ Every dog’s nose print is unique, like a human fingerprint. Snoop lets shelter
 
 ## My role
 
-Snoop was built by a team of four. I built:
+Snoop was built by a team of five — it was the idea our Challenge 5 team chose to take all the way, after we dropped an earlier one (that one became [DogConnect](../dogconnect/)). I built:
 
 - **The entire backend** — a FastAPI service with Supabase Auth, Postgres + pgvector, Cloudinary for photos, deployed on Vercel.
 - **API integration in the app** — the networking layer, sign-in and session restore with refresh tokens, the dog catalog and detail screens from the server, pull-to-refresh, and medical-record icons.

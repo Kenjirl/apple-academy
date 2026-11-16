@@ -5,7 +5,7 @@ kind: ios-app
 order: 8
 period: Mar 2026
 date: 2026-03
-phase: Apple Developer Academy · Week 2
+phase: Apple Developer Academy · Challenge 1
 team: Solo
 role: Design and development
 platform: iPhone · iOS 26.2+
@@ -49,7 +49,7 @@ Memo Your Journey is a **travel journal**. Save a memory with photos, a place, a
 
 ## My role
 
-Solo project from my second week at the Academy — design and development, plus a later “Warm Journal” redesign with full add/edit and a new “Travel Stamp” icon.
+Solo project from Challenge 1, my first at the Academy — design and development, plus a later “Warm Journal” redesign with full add/edit and a new “Travel Stamp” icon.
 
 ## Key features
 

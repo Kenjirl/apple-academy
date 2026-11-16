@@ -7,7 +7,7 @@ order: 1
 period: May–Jun 2026
 date: 2026-05
 phase: Apple Developer Academy · Challenge 3
-team: Team of 4
+team: Team of 6
 role: Story engine — data model, story view & flow, dialog, choices, endings, Chapter 1 script
 platform: iPhone & iPad · iOS 26.2+ · landscape
 accent: "#B2D94B"
@@ -45,7 +45,7 @@ KidSense is a picture-book style game for young children about **personal bounda
 
 ## My role
 
-KidSense was built by a team of four. I built the **story engine**:
+KidSense was built by a team of six. I built the **story engine**:
 
 - The data model for stories — scenes, assets, dialog, choices, endings and checkpoints.
 - `StoryView` and its navigation flow, the dialog bubbles, the choice sheet and the ending cards.

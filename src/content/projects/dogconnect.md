@@ -7,7 +7,7 @@ period: Aug 2026
 date: 2026-08
 phase: Apple Developer Academy · Challenge 5
 team: Solo
-role: Design and development
+role: Built alone — a Challenge 5 team idea (team of 5) that was later dropped
 platform: iPhone & iPad · iOS 26.5+ · two devices
 accent: "#C4572A"
 accentOnLight: "#A84A22"
@@ -41,7 +41,7 @@ The original idea was a *smart* pet monitor that detects the dog’s activity an
 
 ## My role
 
-Solo project — exploring the technical side of a pet-monitoring idea: design, pairing, streaming and security.
+DogConnect started as an idea from my Challenge 5 team of five. Midway through development the team dropped it and moved on to the idea that became [Snoop](../snoop/). By then, this part of the work was mine alone: everything in this app — pairing, streaming, security and the design — is code I wrote myself. I later polished the UI and made a new icon for this portfolio.
 
 ## Key features
 

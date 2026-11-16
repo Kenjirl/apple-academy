@@ -5,7 +5,7 @@ kind: ios-app
 order: 6
 period: Apr 2026
 date: 2026-04
-phase: Apple Developer Academy · Week 8
+phase: Apple Developer Academy · Challenge 2
 team: Team of 2
 role: Auction detail, Place Bid sheet, New Auction form, charts and formatting; integration and PR review
 platform: iPhone · iOS 26.2+
