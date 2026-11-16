@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kenjirl.github.io/apple-academy/sitemap-index.xml

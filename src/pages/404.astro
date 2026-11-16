@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import AppIcon from '../components/AppIcon.astro';
+import { accentStyle, getProjects, projectUrl, withBase } from '../lib/site';
+
+const { caseStudies } = await getProjects();
+---
+<Base title="Page not found" description="This page doesn’t exist." noindex>
+  <section class="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
+    <p class="text-sm font-semibold text-muted">404</p>
+    <h1 class="mt-2 font-display text-4xl font-bold tracking-tight sm:text-5xl">This page doesn’t exist.</h1>
+    <p class="mt-4 text-lg text-muted">Maybe one of these apps is what you were looking for.</p>
+    <ul class="mt-10 flex flex-wrap justify-center gap-4">
+      {
+        caseStudies.map((p) => (
+          <li class="accent-scope" style={accentStyle(p)}>
+            <a href={projectUrl(p)} class="block rounded-[14px]" aria-label={p.data.title} title={p.data.title}>
+              <AppIcon src={p.data.icon} title={p.data.title} size={56} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href={withBase()} class="mt-12 inline-flex rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-bg hover:opacity-90">Back to home</a>
+  </section>
+</Base>

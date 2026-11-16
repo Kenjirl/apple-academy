@@ -1,0 +1,120 @@
+---
+import { getImage } from 'astro:assets';
+import PhoneFrame from './PhoneFrame.astro';
+import { type Project } from '../lib/site';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const d = project.data;
+const landscape = d.orientation === 'landscape';
+
+const items = await Promise.all(
+  d.screenshots.map(async (s, i) => {
+    const full = await getImage({ src: s.src, width: landscape ? 1800 : 828, format: 'webp' });
+    return { ...s, i, full: full.src };
+  }),
+);
+---
+<section aria-labelledby="screens-title" class="relative">
+  <h2 id="screens-title" class="sr-only">Screenshots</h2>
+  <ol
+    data-gallery
+    class="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-6 pt-2 sm:scroll-px-6 sm:px-6 lg:scroll-px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))] lg:px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]"
+  >
+    {
+      items.map((s) => (
+        <li class:list={['shrink-0 snap-start', landscape ? 'w-[82vw] max-w-[560px]' : 'w-[62vw] max-w-[250px]']}>
+          <figure>
+            <button
+              type="button"
+              data-index={s.i}
+              data-full={s.full}
+              data-caption={s.caption ?? s.alt}
+              data-alt={s.alt}
+              class="block w-full cursor-zoom-in rounded-[14%] text-left transition-transform hover:-translate-y-1 motion-reduce:transition-none"
+              aria-label={`Enlarge screenshot ${s.i + 1}: ${s.alt}`}
+            >
+              <PhoneFrame
+                src={s.src}
+                alt={s.alt}
+                orientation={d.orientation}
+                sizes={landscape ? '(min-width: 640px) 560px, 82vw' : '(min-width: 640px) 250px, 62vw'}
+                loading={s.i < 3 ? 'eager' : 'lazy'}
+              />
+            </button>
+            {s.caption && <figcaption class="mt-3 px-1 text-sm leading-snug text-muted">{s.caption}</figcaption>}
+          </figure>
+        </li>
+      ))
+    }
+  </ol>
+
+  <dialog
+    data-lightbox
+    aria-label="Screenshot viewer"
+    class="m-auto max-h-none max-w-none bg-transparent p-0 text-white backdrop:bg-black/85 backdrop:backdrop-blur-sm"
+  >
+    <div class="flex h-dvh w-screen flex-col items-center justify-center gap-4 p-4 sm:p-8">
+      <div class="flex w-full max-w-5xl items-center justify-between text-sm">
+        <span data-counter class="tabular-nums text-white/70"></span>
+        <button type="button" data-close class="rounded-full bg-white/10 px-4 py-2 font-medium hover:bg-white/20">Close</button>
+      </div>
+      <div class="flex min-h-0 w-full max-w-5xl flex-1 items-center justify-center gap-2 sm:gap-4">
+        <button type="button" data-prev aria-label="Previous screenshot" class="shrink-0 rounded-full bg-white/10 p-3 hover:bg-white/20">
+          <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12.8 4.2a.75.75 0 0 1 0 1.06L8.06 10l4.74 4.74a.75.75 0 1 1-1.06 1.06l-5.27-5.27a.75.75 0 0 1 0-1.06l5.27-5.27a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" /></svg>
+        </button>
+        <img data-image alt="" class:list={['max-h-full min-w-0 object-contain shadow-2xl', landscape ? 'w-full rounded-2xl' : 'h-full rounded-[2rem]']} />
+        <button type="button" data-next aria-label="Next screenshot" class="shrink-0 rounded-full bg-white/10 p-3 hover:bg-white/20">
+          <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.2 4.2a.75.75 0 0 1 1.06 0l5.27 5.27a.75.75 0 0 1 0 1.06L8.26 15.8a.75.75 0 1 1-1.06-1.06L11.94 10 7.2 5.26a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
+        </button>
+      </div>
+      <p data-caption class="max-w-xl text-center text-sm leading-snug text-white/85" aria-live="polite"></p>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
+    const section = gallery.parentElement!;
+    const dialog = section.querySelector<HTMLDialogElement>('[data-lightbox]')!;
+    const img = dialog.querySelector<HTMLImageElement>('[data-image]')!;
+    const caption = dialog.querySelector<HTMLElement>('[data-caption]')!;
+    const counter = dialog.querySelector<HTMLElement>('[data-counter]')!;
+    const triggers = [...gallery.querySelectorAll<HTMLButtonElement>('button[data-index]')];
+    let current = 0;
+    let opener: HTMLElement | null = null;
+
+    const show = (i: number) => {
+      current = (i + triggers.length) % triggers.length;
+      const t = triggers[current];
+      img.src = t.dataset.full!;
+      img.alt = t.dataset.alt ?? '';
+      caption.textContent = t.dataset.caption ?? '';
+      counter.textContent = `${current + 1} / ${triggers.length}`;
+    };
+
+    triggers.forEach((t, i) =>
+      t.addEventListener('click', () => {
+        opener = t;
+        show(i);
+        dialog.showModal();
+      }),
+    );
+    dialog.querySelector('[data-prev]')!.addEventListener('click', () => show(current - 1));
+    dialog.querySelector('[data-next]')!.addEventListener('click', () => show(current + 1));
+    dialog.querySelector('[data-close]')!.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+    // Click on the dimmed area (not on the image or controls) closes.
+    dialog.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('img, button')) dialog.close();
+    });
+    dialog.addEventListener('close', () => opener?.focus());
+  });
+</script>

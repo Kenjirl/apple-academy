@@ -1,0 +1,69 @@
+---
+title: Kickbid
+tagline: A sneaker auction app — browse live drops, bid fast, and see if you’re leading or outbid.
+kind: ios-app
+order: 6
+period: Apr 2026
+date: 2026-04
+phase: Apple Developer Academy · Week 8
+team: Team of 2
+role: Auction detail, Place Bid sheet, New Auction form, charts and formatting; integration and PR review
+platform: iPhone · iOS 26.2+
+accent: "#D4FF3A"
+accentOnLight: "#4F6B00"
+accentOnDark: "#D4FF3A"
+icon: ../../assets/projects/kickbid/icon.png
+screenshots:
+  - src: ../../assets/projects/kickbid/01-drops.jpg
+    alt: Drops screen with search, filters and an Ending Soon hero card
+    caption: Drops — search, filters and the auction ending soonest.
+  - src: ../../assets/projects/kickbid/02-detail.jpg
+    alt: Auction detail with a large photo, live countdown and the top bid
+    caption: Auction detail with a live countdown and your status.
+  - src: ../../assets/projects/kickbid/03-detail-price-chart.jpg
+    alt: Step chart of the auction price rising over time with the user's bids marked
+    caption: Price history as a step chart, with your bids marked.
+  - src: ../../assets/projects/kickbid/04-detail-daily-bids.jpg
+    alt: Bar chart of bids per day with the busiest day highlighted
+    caption: Bids per day, busiest day highlighted.
+  - src: ../../assets/projects/kickbid/06-activity.jpg
+    alt: Activity list filtered by Bidding, Won and Lost with a Bid again button
+    caption: Activity — Bidding, Won and Lost, with “Bid again”.
+  - src: ../../assets/projects/kickbid/05-selling.jpg
+    alt: Selling summary with active auctions, total bids and highest value
+    caption: Selling — your own auctions at a glance.
+  - src: ../../assets/projects/kickbid/07-new-auction.jpg
+    alt: New Auction form with photo picker, name, opening price, description and end time
+    caption: Creating a new auction.
+stack: [SwiftUI, Swift Charts, Observation, PhotosUI, TimelineView]
+links:
+  - { label: GitHub repo, url: "https://github.com/Kenjirl/swift-bidding-app" }
+---
+
+## Overview
+
+Kickbid is a **sneaker auction** app. Browse the drops that are live, place a bid in a few taps, keep track of whether you’re leading or outbid, and open an auction for your own pair. Prices are in Rupiah.
+
+## My role
+
+Built with one teammate. **I built** the auction detail screen, the Place Bid sheet, the New Auction form, both charts and the formatting utilities, and handled integration and PR review. My teammate built the tab structure, the auction and My Items lists, and the first version of bid history. Later, for this portfolio, I redesigned the UI (“Hype Drop”) and the app icon.
+
+## Key features
+
+- **Drops** — an “Ending Soon” hero with a per-second countdown, a two-column grid, filters (All / Live / Ending soon / Ended) and search.
+- **Your status everywhere** — Leading, Outbid, Won or Lost (or Selling / Sold for your own auctions), derived from the bid history so it never drifts.
+- **Two charts** — a price step chart that only goes up, with your bids marked, and a daily-bids bar chart.
+- **Fast bidding** — −/+ in Rp 50,000 steps, quick +50k / +100k / +250k / +500k buttons, or typed amounts, with validation and haptic confirmation.
+- **Activity** — every auction you’ve bid on, filtered by Bidding / Won / Lost, with “Bid again” for ones where you’ve been outbid.
+- **Selling** — a summary of your auctions and a form to create a new one with a photo.
+
+## Tech stack
+
+SwiftUI (`TabView`, `NavigationStack`, `LazyVGrid`, `Grid`, `sensoryFeedback`, `contentTransition`), Swift Charts (step `LineMark`/`AreaMark`, `PointMark`, `BarMark`), `TimelineView` for countdowns, Observation (`@Observable` store), PhotosUI, `Decimal.FormatStyle` with the `id_ID` locale. No third-party dependencies.
+
+## Limitations & next steps
+
+- Data lives in memory with sample auctions and one fixed user — no accounts, storage or backend yet.
+- Other people’s bids don’t arrive in real time; bids can’t be cancelled.
+
+Next: a backend with WebSocket for real-time bids, push alerts when you’re outbid, SwiftData storage, auto-bid, and unit tests for the bidding rules.

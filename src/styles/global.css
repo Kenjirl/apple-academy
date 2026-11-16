@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+/* Dark utilities follow the resolved theme on <html data-theme>. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------- Neutral tokens (light) ---------- */
+:root {
+  color-scheme: light;
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --surface-2: #f4f4f3;
+  --ink: #18181b;
+  --muted: #55555c;
+  --faint: #6b6b72;
+  --line: #e6e6e3;
+  --bezel: #1b1b1e;
+  --focus: #2563eb;
+}
+
+/* No-JS fallback: follow the system. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0e0e10;
+    --surface: #17171a;
+    --surface-2: #1e1e22;
+    --ink: #f4f4f5;
+    --muted: #a8a8b0;
+    --faint: #8b8b93;
+    --line: #2a2a2f;
+    --bezel: #2c2c31;
+    --focus: #7aa7ff;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0e0e10;
+  --surface: #17171a;
+  --surface-2: #1e1e22;
+  --ink: #f4f4f5;
+  --muted: #a8a8b0;
+  --faint: #8b8b93;
+  --line: #2a2a2f;
+  --bezel: #2c2c31;
+  --focus: #7aa7ff;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-bezel: var(--bezel);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ---------- Per-app accent ----------
+   An element with class "accent-scope" and inline
+   --accent / --accent-on-light / --accent-on-dark gets a text-safe --accent-ink. */
+.accent-scope {
+  --accent-ink: var(--accent-on-light);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .accent-scope {
+    --accent-ink: var(--accent-on-dark);
+  }
+}
+:root[data-theme="dark"] .accent-scope {
+  --accent-ink: var(--accent-on-dark);
+}
+
+/* ---------- Base ---------- */
+html {
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--bg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+::selection {
+  background: color-mix(in srgb, var(--focus) 25%, transparent);
+}
+
+/* ---------- Case study prose ---------- */
+.prose {
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 1.0625rem;
+}
+.prose > * + * {
+  margin-top: 1em;
+}
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-top: 2.5rem;
+  padding-top: 0.25rem;
+  scroll-margin-top: 5rem;
+}
+.prose h2::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent, var(--ink));
+  margin-bottom: 0.75rem;
+}
+.prose h3 {
+  font-size: 1.15rem;
+  font-weight: 650;
+  margin-top: 1.75rem;
+}
+.prose p,
+.prose li {
+  color: color-mix(in srgb, var(--ink) 88%, var(--bg));
+}
+.prose ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.prose ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+}
+.prose li + li {
+  margin-top: 0.4em;
+}
+.prose li::marker {
+  color: var(--accent-ink, var(--muted));
+}
+.prose strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+.prose a {
+  color: var(--accent-ink, var(--ink));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.prose :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.1em 0.35em;
+  overflow-wrap: anywhere;
+}
+.prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  background: var(--surface-2) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent, var(--line));
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+}
+.prose pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+/* Hide scrollbars on snap galleries but keep them scrollable. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

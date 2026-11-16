@@ -1,0 +1,52 @@
+---
+import AppIcon from './AppIcon.astro';
+import PhoneFrame from './PhoneFrame.astro';
+import { accentStyle, isSolo, projectUrl, type Project } from '../lib/site';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const d = project.data;
+const shot = d.screenshots[0];
+const href = projectUrl(project);
+---
+<article
+  class="accent-scope group relative flex flex-col overflow-hidden rounded-3xl border border-line bg-surface transition-shadow hover:shadow-[0_18px_40px_-24px_color-mix(in_srgb,var(--accent)_70%,transparent)]"
+  style={accentStyle(project)}
+>
+  <div class="h-1 w-full bg-accent" aria-hidden="true"></div>
+  {
+    shot && (
+      <div
+        class="relative flex h-56 justify-center overflow-hidden px-6 pt-6"
+        style="background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent 85%);"
+      >
+        <PhoneFrame
+          src={shot.src}
+          alt={shot.alt}
+          sizes="(min-width: 1024px) 200px, (min-width: 640px) 30vw, 55vw"
+          class="w-[52%] max-w-[200px] transition-transform duration-500 group-hover:-translate-y-1.5 motion-reduce:transition-none"
+        />
+      </div>
+    )
+  }
+  <div class="flex flex-1 flex-col gap-3 border-t border-line p-5">
+    <div class="flex items-center gap-3">
+      <AppIcon src={d.icon} title={d.title} size={44} />
+      <div class="min-w-0">
+        <h3 class="text-lg font-bold leading-tight tracking-tight">
+          <a href={href} class="after:absolute after:inset-0 after:content-['']">{d.title}</a>
+        </h3>
+        <p class="text-xs text-muted">
+          {d.period} · {isSolo(project) ? 'Solo' : d.team}
+        </p>
+      </div>
+    </div>
+    <p class="text-sm leading-relaxed text-muted">{d.tagline}</p>
+    <p class="mt-auto pt-1 text-xs font-semibold uppercase tracking-[0.08em] text-accent-ink">
+      {d.phase.replace('Apple Developer Academy · ', '')}
+    </p>
+  </div>
+</article>

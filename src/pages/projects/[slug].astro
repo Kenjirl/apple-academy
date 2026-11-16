@@ -1,0 +1,125 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import AppIcon from '../../components/AppIcon.astro';
+import FactTable from '../../components/FactTable.astro';
+import ScreenshotGallery from '../../components/ScreenshotGallery.astro';
+import StackList from '../../components/StackList.astro';
+import ExternalCard from '../../components/ExternalCard.astro';
+import { accentStyle, getProjects, projectUrl, withBase, type Project } from '../../lib/site';
+
+export const getStaticPaths = (async () => {
+  const { caseStudies, external } = await getProjects();
+  return caseStudies.map((project, i) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      prev: caseStudies[(i - 1 + caseStudies.length) % caseStudies.length],
+      next: caseStudies[(i + 1) % caseStudies.length],
+      followUps: external.filter((e) => e.data.continues === project.id),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  project: Project;
+  prev: Project;
+  next: Project;
+  followUps: Project[];
+}
+
+const { project, prev, next, followUps } = Astro.props;
+const d = project.data;
+const { Content } = await render(project);
+
+// Pre-rendered by `npm run og` (scripts/make-og.mjs) into public/og/.
+const ogImage = withBase(`og/${project.id}.png`);
+---
+<Base
+  title={d.title}
+  description={`${d.tagline} ${d.phase}, ${d.period}.`}
+  image={ogImage}
+  imageAlt={`${d.title} — ${d.tagline}`}
+>
+  <article class="accent-scope" style={accentStyle(project)}>
+    <!-- Header -->
+    <header class="relative">
+      <div class="h-1.5 w-full bg-accent" aria-hidden="true"></div>
+      <div
+        class="absolute inset-x-0 top-1.5 -z-10 h-72"
+        style="background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 14%, transparent), transparent);"
+        aria-hidden="true"
+      >
+      </div>
+      <div class="mx-auto max-w-6xl px-4 pb-10 pt-8 sm:px-6 sm:pt-12">
+        <a href={`${withBase()}#projects`} class="inline-flex items-center gap-1 text-sm font-medium text-muted hover:text-ink">
+          <span aria-hidden="true">←</span> All projects
+        </a>
+        <div class="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
+          <AppIcon src={d.icon} title={d.title} size={88} loading="eager" />
+          <div>
+            <p class="text-sm font-semibold text-accent-ink">{d.phase}</p>
+            <h1 class="mt-1 font-display text-4xl font-bold tracking-[-0.025em] sm:text-5xl">{d.title}</h1>
+            <p class="mt-3 max-w-2xl text-lg leading-relaxed text-muted">{d.tagline}</p>
+          </div>
+        </div>
+        <div class="mt-10 grid gap-8 lg:grid-cols-[1fr_auto]">
+          <FactTable project={project} />
+        </div>
+      </div>
+    </header>
+
+    <!-- Screenshots -->
+    {d.screenshots.length > 0 && <ScreenshotGallery project={project} />}
+
+    <!-- Body -->
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 pt-6 sm:px-6 lg:grid-cols-[minmax(0,1fr)_260px]">
+      <div class="prose min-w-0 max-w-3xl">
+        <Content />
+      </div>
+      <aside class="order-first lg:order-none" aria-label="Tech stack">
+        <div class="lg:sticky lg:top-24">
+          <h2 class="text-xs font-semibold uppercase tracking-[0.08em] text-muted">Built with</h2>
+          <div class="mt-3"><StackList items={d.stack} /></div>
+        </div>
+      </aside>
+    </div>
+
+    {
+      followUps.length > 0 && (
+        <section class="mx-auto mt-14 max-w-6xl px-4 sm:px-6" aria-labelledby="next-chapter">
+          <h2 id="next-chapter" class="mb-4 font-display text-xl font-bold tracking-tight">What came next</h2>
+          <div class="grid gap-6 md:grid-cols-2">
+            {followUps.map((p) => <ExternalCard project={p} />)}
+          </div>
+        </section>
+      )
+    }
+  </article>
+
+  <!-- Prev / next -->
+  <nav aria-label="More projects" class="mx-auto mt-16 grid max-w-6xl gap-4 px-4 sm:grid-cols-2 sm:px-6">
+    {
+      [
+        { p: prev, label: 'Previous' },
+        { p: next, label: 'Next' },
+      ].map(({ p, label }) => (
+        <a
+          href={projectUrl(p)}
+          class:list={[
+            'accent-scope group flex items-center gap-4 rounded-3xl border border-line bg-surface p-4 transition-colors hover:border-[color-mix(in_srgb,var(--accent)_60%,var(--line))]',
+            label === 'Next' && 'sm:flex-row-reverse sm:text-right',
+          ]}
+          style={accentStyle(p)}
+        >
+          <AppIcon src={p.data.icon} title={p.data.title} size={48} />
+          <span class="min-w-0">
+            <span class="block text-xs font-semibold uppercase tracking-[0.08em] text-muted">{label}</span>
+            <span class="block truncate text-lg font-bold tracking-tight">{p.data.title}</span>
+          </span>
+        </a>
+      ))
+    }
+  </nav>
+</Base>
