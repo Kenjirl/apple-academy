@@ -6,7 +6,7 @@ order: 9
 period: Oct-Nov 2026
 date: 2026-10
 phase: Apple Developer Academy · Challenge 7
-team: Team of 4
+team: Team of 6
 role: Developer (Godot 4, GDScript)
 accent: "#B2D94B"
 accentOnLight: "#43781F"
