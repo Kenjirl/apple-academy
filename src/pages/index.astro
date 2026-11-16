@@ -45,7 +45,7 @@ const withBackend = caseStudies.filter((p) => p.data.kind === 'ios-app+backend')
         caseStudies.map((p, i) => (
           <li class="accent-scope" style={accentStyle(p)}>
             <a href={projectUrl(p)} class="block rounded-[14px] transition-transform hover:-translate-y-1 motion-reduce:transition-none" aria-label={p.data.title} title={p.data.title}>
-              <AppIcon src={p.data.icon} title={p.data.title} size={56} loading={i < 4 ? 'eager' : 'lazy'} />
+              <AppIcon src={p.data.icon} title={p.data.title} size={56} loading="eager" />
             </a>
           </li>
         ))
