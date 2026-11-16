@@ -33,7 +33,7 @@ function wrap(text, maxChars, maxLines) {
   if (line) lines.push(line);
   if (lines.length > maxLines) {
     const kept = lines.slice(0, maxLines);
-    kept[maxLines - 1] = kept[maxLines - 1].replace(/[\s,.;:—-]*$/, '') + '…';
+    kept[maxLines - 1] = kept[maxLines - 1].replace(/[\s,.;:—-]*$/, '') + '...';
     return kept;
   }
   return lines;
@@ -138,8 +138,8 @@ async function defaultImage(projects, profile) {
   <svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
     <rect width="${W}" height="${H}" fill="${BG}"/>
     <text x="72" y="120" font-family="${FONT}" font-size="26" font-weight="600" fill="${MUTED}">${esc(profile.headline)}</text>
-    <text x="72" y="210" font-family="${FONT}" font-size="80" font-weight="700" letter-spacing="-2" fill="${INK}">Hi, I’m ${esc(profile.name)}.</text>
-    <text x="72" y="296" font-family="${FONT}" font-size="80" font-weight="700" letter-spacing="-2" fill="#8a8a91">Here’s what I built this year.</text>
+    <text x="72" y="210" font-family="${FONT}" font-size="80" font-weight="700" letter-spacing="-2" fill="${INK}">Hi, I'm ${esc(profile.name)}.</text>
+    <text x="72" y="296" font-family="${FONT}" font-size="80" font-weight="700" letter-spacing="-2" fill="#8a8a91">Here's what I built this year.</text>
     ${introLines.map((l, i) => `<text x="72" y="${370 + i * 40}" font-family="${FONT}" font-size="30" fill="${MUTED}">${esc(l)}</text>`).join('')}
   </svg>`;
   const size = 96, gap = 24;

@@ -63,7 +63,7 @@ const jsonLd = {
       '@type': 'WebPage',
       '@id': `${pageUrl}#page`,
       url: pageUrl,
-      name: `${d.title} — case study`,
+      name: `${d.title} - case study`,
       description: d.tagline,
       isPartOf: { '@id': graph.websiteId },
       about: { '@id': `${pageUrl}#app` },
@@ -83,7 +83,7 @@ const jsonLd = {
   title={d.title}
   description={`${d.tagline} ${d.phase}, ${d.period}.`}
   image={ogImage}
-  imageAlt={`${d.title} — ${d.tagline}`}
+  imageAlt={`${d.title} - ${d.tagline}`}
   ogType="article"
   jsonLd={jsonLd}
 >

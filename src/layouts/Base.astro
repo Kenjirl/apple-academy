@@ -20,7 +20,7 @@ interface Props {
 }
 
 const profile = await getProfile();
-const homeTitle = `${SITE_NAME} — ${profile.name} · ${profile.headline.replace(/^Learner · /, '')}`;
+const homeTitle = `${SITE_NAME} - ${profile.name} · ${profile.headline.replace(/^Learner · /, '')}`;
 const {
   title,
   description = profile.intro,
